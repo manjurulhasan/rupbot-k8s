@@ -19,17 +19,12 @@ spec:
         image: nginx
         imagePullPolicy: IfNotPresent
         volumeMounts:
-        - name: rupbot-pvc
-          mountPath: /var/www/html
         - name: config
           mountPath: /etc/nginx/conf.d
         ports:
         - containerPort: 80
           protocol: TCP
       volumes:
-        - name: rupbot-pvc
-          persistentVolumeClaim:
-            claimName: rupbot-pvc
         - name: config
           configMap:
             name: rupbot-nginx-config

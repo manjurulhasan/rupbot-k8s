@@ -15,9 +15,6 @@ spec:
         app: rupbot
     spec:
       volumes:
-        - name: rupbot-pvc
-          persistentVolumeClaim:
-            claimName: rupbot-pvc
         - name: logs
           emptyDir: {}
         - name: views
@@ -27,8 +24,6 @@ spec:
         image: mdshajib/rupbot
         imagePullPolicy: Always
         volumeMounts:
-          - name: rupbot-pvc
-            mountPath: /var/www/html
           - name: logs
             mountPath: /var/www/html/storage/logs
           - name: views
