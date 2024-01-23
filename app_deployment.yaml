@@ -30,11 +30,6 @@ spec:
           name: logs
         - mountPath: /var/www/html/storage/framework/views
           name: views
-        - mountPath: /var/www/html
-          name: rupbot-storage
       volumes:
-      - name: rupbot-storage
-        persistentVolumeClaim:
-          claimName: rupbot-pvc
       - name: logs
       - name: views
