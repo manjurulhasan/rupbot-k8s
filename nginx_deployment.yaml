@@ -24,6 +24,8 @@ spec:
         volumeMounts:
         - mountPath: /etc/nginx/conf.d
           name: config
+        - mountPath: /var/www/html
+          name: rupbot-storage
       volumes:
       - configMap:
           items:
@@ -31,3 +33,6 @@ spec:
             path: site.conf
           name: rupbot-nginx-config
         name: config
+      - name: rupbot-storage
+        persistentVolumeClaim:
+          claimName: rupbot-pvc

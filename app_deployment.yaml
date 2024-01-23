@@ -15,7 +15,10 @@ spec:
         app: rupbot
     spec:
       containers:
-      - image: mdshajib/rupbot
+      - env:
+        - name: APP_KEY
+          value: base64:cUPmwHx4LXa4Z25HhzFiWCf7TlQmSqnt98pnuiHmzgY=
+        image: mdshajib/rupbot
         imagePullPolicy: Always
         name: rupbot
         ports:
@@ -27,6 +30,11 @@ spec:
           name: logs
         - mountPath: /var/www/html/storage/framework/views
           name: views
+        - mountPath: /var/www/html
+          name: rupbot-storage
       volumes:
+      - name: rupbot-storage
+        persistentVolumeClaim:
+          claimName: rupbot-pvc
       - name: logs
       - name: views
