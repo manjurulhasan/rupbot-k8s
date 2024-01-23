@@ -30,7 +30,7 @@ spec:
           name: logs
         - mountPath: /var/www/html/storage/framework/views
           name: views
-        - mountPath: /var/www/html/public
+        - mountPath: /var/www/html
           name: public
       volumes:
       - name: logs
