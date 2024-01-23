@@ -19,15 +19,13 @@ spec:
         image: nginx:1.25.3-alpine-slim
         imagePullPolicy: Always
         volumeMounts:
-        - name: config
-          mountPath: /etc/nginx/conf.d
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
         ports:
         - containerPort: 80
           protocol: TCP
       volumes:
-        - name: config
-          configMap:
-            name: rupbot-nginx-config
-            items:
-            - key: config
-              path: site.conf
+      - name: nginx-config
+        configMap:
+          name: rupbot-nginx-config
