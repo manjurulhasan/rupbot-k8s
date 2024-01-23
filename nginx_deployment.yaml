@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rupbot-nginx-deployment
   labels:
     app: rupbot-nginx
+  name: rupbot-nginx-deployment
 spec:
   replicas: 1
   selector:
@@ -15,17 +15,17 @@ spec:
         app: rupbot-nginx
     spec:
       containers:
-      - name: rupbot-nginx
-        image: nginx:1.25.3-alpine-slim
+      - image: nginx:1.25.3-alpine-slim
         imagePullPolicy: Always
-        volumeMounts:
-        - name: nginx-config
-          mountPath: /etc/nginx/nginx.conf
-          subPath: nginx.conf
+        name: rupbot-nginx
         ports:
         - containerPort: 80
           protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/nginx/nginx.conf
+          name: nginx-config
+          subPath: nginx.conf
       volumes:
-      - name: nginx-config
-        configMap:
+      - configMap:
           name: rupbot-nginx-config
+        name: nginx-config

@@ -3,10 +3,7 @@ kind: Service
 metadata:
   name: rupbot-service
 spec:
+  ports:
+  - port: 9000
   selector:
     app: rupbot
-  ports:
-    - protocol: TCP
-      port: 9000
-      targetPort: 9000
-  type: ClusterIP
