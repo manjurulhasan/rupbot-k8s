@@ -5,13 +5,13 @@ metadata:
   labels:
     app: rupbot-nginx
 data:
-  nginx.conf: |
+  config : |
     server {
       listen 80;
       error_log  /var/log/nginx/error.log;
       access_log /var/log/nginx/access.log;
       root /var/www/html/public;
-      index index.php index.html
+      index index.php index.html;
       location / {
           try_files $uri $uri/ /index.php?$query_string;
       }
