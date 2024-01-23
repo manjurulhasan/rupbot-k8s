@@ -20,7 +20,7 @@ spec:
         imagePullPolicy: Always
         volumeMounts:
         - name: config
-          mountPath: /etc/nginx/httpd.d
+          mountPath: /etc/nginx/conf.d
         ports:
         - containerPort: 80
           protocol: TCP
