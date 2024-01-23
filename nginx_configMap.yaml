@@ -27,4 +27,11 @@ data:
           fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
           fastcgi_param PATH_INFO $fastcgi_path_info;
       }
+
+      location ~* \.(css|js|jpg|jpeg|png|gif|ico)$ {
+          expires max;
+          log_not_found off;
+          access_log off;
+      }
+
     }
