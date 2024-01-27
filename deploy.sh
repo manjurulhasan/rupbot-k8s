@@ -3,6 +3,8 @@
 echo "=========== APP deploying ==========="
 
 # kubectl apply -f ./rupbot_pvc.yaml
+kubectl apply -f ./app_secret.yaml
+kubectl apply -f ./app_configMap.yaml
 kubectl apply -f ./app_service.yaml
 kubectl apply -f ./app_deployment.yaml
 

@@ -15,22 +15,59 @@ spec:
         app: rupbot
     spec:
       containers:
-      - env:
-        - name: APP_KEY
-          value: base64:cUPmwHx4LXa4Z25HhzFiWCf7TlQmSqnt98pnuiHmzgY=
-        image: mdshajib/rupbot
-        imagePullPolicy: Always
+      - image: mdshajib/rupbot:latest
+        imagePullPolicy: IfNotPresent
         name: rupbot
+        envFrom:
+          - configMapRef:
+              name: rupbot-configmap
+          - secretRef:
+              name: rupbot-secrets
+        resources:
+          requests:
+            cpu: 500m
+            memory: "128Mi"
+          limits:
+            cpu: "1"  
+            memory: "256Mi"
         ports:
         - containerPort: 9000
           name: rupbot
           protocol: TCP
         volumeMounts:
-        - mountPath: /var/www/html/storage/logs
+        - mountPath: /var/www/rupbot/storage/logs
           name: logs
-        - mountPath: /var/www/html/storage/framework/views
+        - mountPath: /var/www/rupbot/storage/framework/views
           name: views
+        - mountPath: /var/www/rupbot/storage/framework/cache
+          name: cache
+        - mountPath: /var/www/rupbot/storage/framework/sessions
+          name: sessions
+        - mountPath: /var/www/rupbot
+          name: source
+      initContainers:
+      - image: mdshajib/rupbot:latest
+        imagePullPolicy: IfNotPresent
+        name: rupbotinit
+        volumeMounts:
+        - name: source
+          mountPath: /var/www/rupbot
+        command:
+          - "sh"
+          - "-c"
+          - |
+            cp .env.example .env
+            cp -r /var/www/html/. /var/www/rupbot
       volumes:
       - name: logs
+        emptyDir: {}
       - name: views
+        emptyDir: {}
+      - name: cache
+        emptyDir: {}
+      - name: sessions
+        emptyDir: {}
+      - name: source
+        hostPath:
+          path: /var/www/rupbot
 

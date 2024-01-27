@@ -16,14 +16,23 @@ spec:
     spec:
       containers:
       - image: nginx:1.25.3-alpine-slim
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: rupbot-nginx
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "50Mi"
+          limits:
+            cpu: "400m"  
+            memory: "100Mi"
         ports:
         - containerPort: 80
           protocol: TCP
         volumeMounts:
         - mountPath: /etc/nginx/conf.d
           name: config
+        - name: source
+          mountPath: /var/www/rupbot
       volumes:
       - configMap:
           items:
@@ -31,3 +40,6 @@ spec:
             path: site.conf
           name: rupbot-nginx-config
         name: config
+      - name: source
+        hostPath:
+          path: /var/www/rupbot
