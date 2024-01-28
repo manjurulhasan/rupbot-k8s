@@ -35,29 +35,14 @@ spec:
           name: rupbot
           protocol: TCP
         volumeMounts:
-        - mountPath: /var/www/rupbot/storage/logs
+        - mountPath: /var/www/html/storage/logs
           name: logs
-        - mountPath: /var/www/rupbot/storage/framework/views
+        - mountPath: /var/www/html/storage/framework/views
           name: views
-        - mountPath: /var/www/rupbot/storage/framework/cache
+        - mountPath: /var/www/html/storage/framework/cache
           name: cache
-        - mountPath: /var/www/rupbot/storage/framework/sessions
+        - mountPath: /var/www/html/storage/framework/sessions
           name: sessions
-        - mountPath: /var/www/rupbot
-          name: source
-      initContainers:
-      - image: mdshajib/rupbot:latest
-        imagePullPolicy: IfNotPresent
-        name: rupbotinit
-        volumeMounts:
-        - name: source
-          mountPath: /var/www/rupbot
-        command:
-          - "sh"
-          - "-c"
-          - |
-            cp .env.example .env
-            cp -r /var/www/html/. /var/www/rupbot
       volumes:
       - name: logs
         emptyDir: {}
@@ -67,7 +52,4 @@ spec:
         emptyDir: {}
       - name: sessions
         emptyDir: {}
-      - name: source
-        hostPath:
-          path: /var/www/rupbot
 
