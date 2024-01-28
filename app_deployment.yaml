@@ -43,14 +43,6 @@ spec:
           name: cache
         - mountPath: /var/www/html/storage/framework/sessions
           name: sessions
-      initContainers:
-        - name: database-migrations
-          image: mdshajib/rupbot:latest
-          imagePullPolicy: IfNotPresent
-          command: ["/bin/sh", "-c"]
-          args:
-          - |
-            cp .env.example .env
       volumes:
       - name: logs
         emptyDir: {}
