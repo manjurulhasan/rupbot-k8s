@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - image: mdshajib/rupbot:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: rupbot
         envFrom:
           - configMapRef:
@@ -46,7 +46,7 @@ spec:
       initContainers:
         - name: database-migrations
           image: mdshajib/rupbot:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           args:
           - |
