@@ -7,7 +7,8 @@ data:
   APP_KEY: base64:+lPdGJdynZIXk4jf1yHgBloKg7ELSAnIDU6b0g8GZso=
   APP_ENV: local
   APP_DEBUG: "true"
-  APP_URL: http://localhost:8088
+  APP_URL: http://rupbot.com
+  ASSET_URL: http://rupbot.com
   LOG_CHANNEL: stack
   LOG_LEVEL: debug
   DB_CONNECTION: mysql

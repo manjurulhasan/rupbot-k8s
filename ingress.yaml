@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rupbot-ingress
+spec:
+  rules:
+  - host: "rupbot.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: rupbot-nginx-service
+            port:
+              number: 80
